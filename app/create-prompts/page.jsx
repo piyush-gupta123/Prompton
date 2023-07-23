@@ -20,6 +20,7 @@ const CreatePrompt = () => {
     e.preventDefault();
     setSubmitting(true);
     // C:\Users\HP\OneDrive\Desktop\chatgpt_prompts\app\api\prompt\new\route.js
+    // Backend Route
     try {
       const response = await fetch("/api/prompt/new", {
         method: "POST",
