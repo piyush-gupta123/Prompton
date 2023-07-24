@@ -21,6 +21,7 @@ const CreatePrompt = () => {
     setSubmitting(true);
     // C:\Users\HP\OneDrive\Desktop\chatgpt_prompts\app\api\prompt\new\route.js
     // Backend Route
+    // console.log("Create prompt function");
     try {
       const response = await fetch("/api/prompt/new", {
         method: "POST",
@@ -47,7 +48,7 @@ const CreatePrompt = () => {
       post={post}
       setPost={setPost}
       submitting={submitting}
-      setSubmitting={createPrompt}
+      handleSubmit={createPrompt}
     />
   );
 };
