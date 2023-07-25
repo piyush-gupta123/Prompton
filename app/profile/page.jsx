@@ -8,12 +8,13 @@ import Profile from "@components/Profile";
 
 const MyProfile = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/user/${session?.user.id}/posts`);
+      const response = await fetch(`/api/users/${session?.user.id}/posts`);
       const data = await response.json();
 
       setPosts(data);
@@ -23,12 +24,16 @@ const MyProfile = () => {
       fetchPosts();
     }
   }, []);
-  const handleEdit = () => {};
+  const handleEdit = (post) => {
+    router.push(`/update-prompt?id=${post._id}`)
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = (post) => {
+    router.push(`/delete-prompt?id=${post._id}`)
+  };
   return (
     <Profile
-      name="My Profile"
+      name="My"
       desc="Welcome to your personalized profile page"
       data={posts}
       handleEdit={handleEdit}
