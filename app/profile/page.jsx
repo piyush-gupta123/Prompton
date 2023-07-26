@@ -25,23 +25,26 @@ const MyProfile = () => {
     }
   }, []);
   const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`)
+    router.push(`/update-prompt?id=${post._id}`);
   };
 
-  const handleDelete = async(post) => {
-    const hasConfirmed = confirm("Are you sure you want to delete this prompt.");
+  const handleDelete = async (post) => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this prompt."
+    );
 
-    if(hasConfirmed){
-      try{
-        await fetch(`/api/prompt/${post._id.toString()}`,{
-          method: "DELETE"
-        })
+    if (hasConfirmed) {
+      try {
+        await fetch(`/api/prompt/${post._id.toString()}`, {
+          method: "DELETE",
+        });
 
-        const filteredPost = posts.filter((p)=>p.id!==post._id)
+        const filteredPost = posts.filter((p) => p.id !== post._id);
 
-        setPosts(filteredPost)
-      }
-      catch(err){
+        setPosts(filteredPost);
+
+        router.push("/");
+      } catch (err) {
         console.log(err);
       }
     }
