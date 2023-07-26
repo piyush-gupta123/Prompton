@@ -15,10 +15,19 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     navigator.clipboard.writeText(post.prompt);
     setTimeout(() => setCopied(""), 5000);
   };
+
+  const handleClick = () => {
+    if (post.creator._id === session?.user.id) return Router.push("/profile");
+
+    Router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
+  };
   return (
     <div className="prompt_card">
       <div className="flex justify-between gap-5 items-start">
-        <div className="flex-1 flex justify-center gap-3 items-center cursor-pointer">
+        <div
+          className="flex-1 flex justify-center gap-3 items-center cursor-pointer"
+          onClick={handleClick}
+        >
           <Image
             src={post.creator.image}
             alt="user_image"
@@ -26,14 +35,15 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             height={40}
             className="rounded-full object-contain"
           />
-        </div>
-        <div className="flex flex-col">
-          <h3 className="font-satoshi font-semibold text-gray-900">
-            {post.creator.username}
-          </h3>
-          <p className="text-sm font-inter text-gray-500">
-            {post.creator.email}
-          </p>
+
+          <div className="flex flex-col cursor-pointer">
+            <h3 className="font-satoshi font-semibold text-gray-900">
+              {post.creator.username}
+            </h3>
+            <p className="text-sm font-inter text-gray-500">
+              {post.creator.email}
+            </p>
+          </div>
         </div>
         <div className="copy_btn" onClick={handleCopy}>
           <Image
